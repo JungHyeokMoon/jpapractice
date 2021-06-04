@@ -1,0 +1,4 @@
+rootProject.name = 'jpapratice'
+include 'ch'
+include 'ch05-model2'
+
