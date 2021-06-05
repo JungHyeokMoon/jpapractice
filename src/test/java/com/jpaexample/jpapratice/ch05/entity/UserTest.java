@@ -1,6 +1,7 @@
 package com.jpaexample.jpapratice.ch05.entity;
 
 import com.jpaexample.jpapratice.ch05.enums.OrderStatus;
+import com.jpaexample.jpapratice.ch09.Address;
 import org.aspectj.lang.annotation.Before;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -28,7 +29,7 @@ class UserTest {
     private User user;
     @Test
     void test(){
-        User user = User.builder().name("정혁").city("의정부").street("호원동").zipcode("123456").build();
+        User user = User.builder().name("정혁").address(Address.builder().city("city").street("street").zipcode("zipcode").build()).build();
         testEntityManager.persist(user); //ID가 IDENTITY라 어짜피 쓰기지연이 되지않음.
         assertEquals(1,user.getId());
         assertNotNull(user.getOrders());

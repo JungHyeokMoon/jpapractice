@@ -5,6 +5,7 @@ import com.jpaexample.jpapratice.ch05.entity.OrderItem;
 import com.jpaexample.jpapratice.ch05.enums.OrderStatus;
 import com.jpaexample.jpapratice.ch06.Delivery;
 import com.jpaexample.jpapratice.ch06.DeliveryStatus;
+import com.jpaexample.jpapratice.ch09.Address;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,8 @@ public class CascadeTest {
     @Test
     @DisplayName("Cascade 테스트")
     void test(){
-        Delivery delivery = Delivery.builder().city("city1").status(DeliveryStatus.READY).street("street1").zipcode("zipcode1").build();
+        Delivery delivery = Delivery.builder().address(Address.builder().city("city1").street("street1").zipcode("zipcode1").build())
+                .status(DeliveryStatus.COMP).build();
         OrderItem orderItem1 = OrderItem.builder().orderPrice(1000).count(1).build();
         OrderItem orderItem2 = OrderItem.builder().orderPrice(2000).count(1).build();
 

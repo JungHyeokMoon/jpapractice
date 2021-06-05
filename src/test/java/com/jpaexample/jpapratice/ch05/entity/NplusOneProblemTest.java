@@ -3,6 +3,7 @@ package com.jpaexample.jpapratice.ch05.entity;
 import com.jpaexample.jpapratice.ch05.enums.OrderStatus;
 import com.jpaexample.jpapratice.ch05.repository.OrderRepository;
 import com.jpaexample.jpapratice.ch05.repository.UserRepository;
+import com.jpaexample.jpapratice.ch09.Address;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +31,8 @@ public class NplusOneProblemTest {
     @BeforeEach
     void setUp(){
         List<User> userList = new ArrayList<>();
-        User user = User.builder().city("city1").street("street1").name("name1").zipcode("1234").build();
+        User user = User.builder().address(Address.builder().city("city1").street("street1").zipcode("zipcode1").build())
+                .name("name1").build();
         Order order1 = Order.builder().orderStatus(OrderStatus.ORDER).build();
         Order order2 = Order.builder().orderStatus(OrderStatus.ORDER).build();
         Order order3 = Order.builder().orderStatus(OrderStatus.CANCEL).build();
@@ -41,7 +43,7 @@ public class NplusOneProblemTest {
 
         userList.add(user);
 
-        User user1 = User.builder().city("city2").street("strret2").name("name2").zipcode("1234").build();
+        User user1 = User.builder().name("name2").address(Address.builder().city("city2").street("street2").zipcode("zipcode2").build()).build();
 
         Order order4 = Order.builder().orderStatus(OrderStatus.ORDER).build();
         Order order5 = Order.builder().orderStatus(OrderStatus.CANCEL).build();
