@@ -41,6 +41,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath password = createString("password");
 
+    public final SetPath<String, StringPath> passwordHistory = this.<String, StringPath>createSet("passwordHistory", String.class, StringPath.class, PathInits.DIRECT2);
+
     public QUser(String variable) {
         this(User.class, forVariable(variable), INITS);
     }

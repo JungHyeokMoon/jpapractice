@@ -1,6 +1,7 @@
 package com.jpaexample.jpapratice.domain.ch05.entity;
 
 import com.jpaexample.jpapratice.domain.ch09.Address;
+import com.jpaexample.jpapratice.domain.converter.PasswordStringConverter;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,8 +18,8 @@ public class User extends BaseEntity{
     private String name;
     private String password;
 
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private Set<String> passwordListRecentFive = new LinkedHashSet<>();
+    @Convert(converter = PasswordStringConverter.class)
+    private Set<String> passwordHistory;
 
     @Embedded
     private Address address;

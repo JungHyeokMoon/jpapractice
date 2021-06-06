@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 @Configuration
 public class JacksonConfiguration {
 
-    private static final String localDateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+    private static final String localDateTimeFormat = "yyyy-MM-dd HH:mm";
 
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
