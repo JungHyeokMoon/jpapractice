@@ -1,8 +1,8 @@
 package com.jpaexample.jpapratice.ch10;
 
-import com.jpaexample.jpapratice.ch05.entity.User;
-import com.jpaexample.jpapratice.ch05.repository.UserRepository;
-import com.jpaexample.jpapratice.ch09.Address;
+import com.jpaexample.jpapratice.domain.ch05.entity.User;
+import com.jpaexample.jpapratice.repository.UserRepository;
+import com.jpaexample.jpapratice.domain.ch09.Address;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,11 +12,9 @@ import org.springframework.test.context.ActiveProfiles;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NonUniqueResultException;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

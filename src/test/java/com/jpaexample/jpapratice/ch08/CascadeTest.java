@@ -1,11 +1,11 @@
 package com.jpaexample.jpapratice.ch08;
 
-import com.jpaexample.jpapratice.ch05.entity.Order;
-import com.jpaexample.jpapratice.ch05.entity.OrderItem;
-import com.jpaexample.jpapratice.ch05.enums.OrderStatus;
-import com.jpaexample.jpapratice.ch06.Delivery;
-import com.jpaexample.jpapratice.ch06.DeliveryStatus;
-import com.jpaexample.jpapratice.ch09.Address;
+import com.jpaexample.jpapratice.domain.ch05.entity.Order;
+import com.jpaexample.jpapratice.domain.ch05.entity.OrderItem;
+import com.jpaexample.jpapratice.domain.ch05.enums.OrderStatus;
+import com.jpaexample.jpapratice.domain.ch06.Delivery;
+import com.jpaexample.jpapratice.domain.ch06.DeliveryStatus;
+import com.jpaexample.jpapratice.domain.ch09.Address;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

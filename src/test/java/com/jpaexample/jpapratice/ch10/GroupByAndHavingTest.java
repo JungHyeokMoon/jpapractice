@@ -1,12 +1,10 @@
 package com.jpaexample.jpapratice.ch10;
 
-import com.jpaexample.jpapratice.ch05.entity.Order;
-import com.jpaexample.jpapratice.ch05.entity.User;
-import com.jpaexample.jpapratice.ch05.enums.OrderStatus;
-import com.jpaexample.jpapratice.ch05.repository.UserRepository;
-import com.jpaexample.jpapratice.ch09.Address;
-import org.h2.engine.UserBuilder;
-import org.junit.jupiter.api.Assertions;
+import com.jpaexample.jpapratice.domain.ch05.entity.Order;
+import com.jpaexample.jpapratice.domain.ch05.entity.User;
+import com.jpaexample.jpapratice.domain.ch05.enums.OrderStatus;
+import com.jpaexample.jpapratice.repository.UserRepository;
+import com.jpaexample.jpapratice.domain.ch09.Address;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
