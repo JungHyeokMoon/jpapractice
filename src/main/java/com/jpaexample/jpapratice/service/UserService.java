@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -27,7 +28,7 @@ public class UserService {
      */
 
     public Long join(User user){
-        if(ObjectUtils.anyNotNull(user.getName(),user.getPassword())){
+        if(ObjectUtils.allNull(user.getName(),user.getPassword())){
             throw new BusinessException(ErrorCode.MISSING_REQUIRED_ITEMS);
         }
         validateDuplicateUser(user);
@@ -40,11 +41,24 @@ public class UserService {
         return save.getId();
     }
 
-    private void validateDuplicateUser(User user){
-        List<User> byName = userRepository.findByName(user.getName());
-        if(!byName.isEmpty()){
-            throw new BusinessException(ErrorCode.DUPLICATE_USER);
+    public void changePassword(String userName, String newPassword) {
+        Optional<User> byName = findByName(userName);
+        User user = byName.orElseThrow();
+        Set<String> passwordHistory = user.getPasswordHistory();
+        for(var pastPassword : passwordHistory){
+            if(passwordEncoder.matches(newPassword,pastPassword))
+                throw new BusinessException(ErrorCode.INVALID_PASSWORD);
         }
+        String encode = passwordEncoder.encode(newPassword);
+        user.setPassword(encode);
+        passwordHistory.add(encode);
+        userRepository.save(user); // 없어도 트랜잭션끝나면 저장이되는지..
+    }
+
+    private void validateDuplicateUser(User user){
+        Optional<User> byName = findByName(user.getName());
+        if(byName.isPresent())
+            throw new BusinessException(ErrorCode.DUPLICATE_USER);
     }
 
     public List<User> findAllUsers(){
@@ -54,4 +68,9 @@ public class UserService {
     public Optional<User> findOne(Long userId){
         return userRepository.findById(userId);
     }
+
+    private Optional<User> findByName(String userName){
+        return userRepository.findByName(userName);
+    }
+
 }

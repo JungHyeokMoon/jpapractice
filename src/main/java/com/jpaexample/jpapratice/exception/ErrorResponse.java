@@ -3,24 +3,21 @@ package com.jpaexample.jpapratice.exception;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.validation.FieldError;
-
-import java.util.List;
+import org.springframework.http.HttpStatus;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ErrorResponse {
 
     private String message;
-    private int status;
-    private List<FieldError> errors;
-    private String code;
+    private HttpStatus httpStatus;
 
-    @Getter
-    @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    public static class FieldError{
-        private String field;
-        private String value;
-        private String reason;
+    private ErrorResponse(final ErrorCode errorCode) {
+        this.message = errorCode.getMessage();
+        this.httpStatus = errorCode.getHttpStatus();
+    }
+
+    public static ErrorResponse of(final ErrorCode errorCode){
+        return new ErrorResponse(errorCode);
     }
 }

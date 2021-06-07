@@ -29,12 +29,6 @@ public class User extends BaseEntity{
     Set<Order> orders = new LinkedHashSet<>();
 
     @Builder
-    public User(String name, Address address) {
-        this.name = name;
-        this.address = address;
-    }
-
-    @Builder
     public User(String name, String currentPassword, Address address) {
         this.name = name;
         this.password = currentPassword;

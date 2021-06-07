@@ -67,7 +67,7 @@ class UserTest {
         User user2 = User.builder().name("name1").address(Address.builder().city("city1").zipcode("zipcode1").street("street1").build()).build();
         userRepository.save(user2);
 
-        List<User> name1 = userRepository.findByName("name1");
-        assertEquals(1,name1.size());
+        User name1 = userRepository.findByName("name1").get();
+        assertEquals("name1",name1.getName());
     }
 }
