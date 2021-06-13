@@ -37,6 +37,7 @@ public class UserService {
         }
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
+        user.getPasswordHistory().add(encodedPassword);
         User save = userRepository.save(user);
         return save.getId();
     }
@@ -65,8 +66,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> findOne(Long userId){
-        return userRepository.findById(userId);
+    public User findOne(Long userId){
+        return userRepository.findById(userId).orElseThrow(()->new BusinessException(ErrorCode.SELECT_EMPTY));
     }
 
     private Optional<User> findByName(String userName){

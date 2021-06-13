@@ -1,5 +1,6 @@
 package com.jpaexample.jpapratice.domain.ch05.entity;
 
+import com.jpaexample.jpapratice.configuration.DataJpaTestConfig;
 import com.jpaexample.jpapratice.domain.ch05.enums.OrderStatus;
 import com.jpaexample.jpapratice.repository.OrderRepository;
 import com.jpaexample.jpapratice.repository.UserRepository;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
 import javax.persistence.EntityManager;
@@ -21,6 +23,7 @@ import static com.jpaexample.jpapratice.domain.ch05.entity.QUser.*;
 
 @DataJpaTest
 @ActiveProfiles("test")
+@Import(DataJpaTestConfig.class)
 public class NplusOneProblemTest {
 
     @Autowired

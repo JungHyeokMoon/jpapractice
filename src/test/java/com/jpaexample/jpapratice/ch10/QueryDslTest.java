@@ -1,5 +1,6 @@
 package com.jpaexample.jpapratice.ch10;
 
+import com.jpaexample.jpapratice.configuration.DataJpaTestConfig;
 import com.jpaexample.jpapratice.domain.ch05.entity.User;
 import com.jpaexample.jpapratice.repository.UserRepository;
 import com.jpaexample.jpapratice.domain.ch09.Address;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
 import static com.jpaexample.jpapratice.domain.ch05.entity.QUser.user;
@@ -19,6 +21,7 @@ import java.util.List;
 
 @DataJpaTest
 @ActiveProfiles("test")
+@Import(DataJpaTestConfig.class)
 public class QueryDslTest {
     @Autowired
     private EntityManager entityManager;

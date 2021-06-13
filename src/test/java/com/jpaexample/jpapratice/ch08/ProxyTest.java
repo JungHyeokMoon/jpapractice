@@ -1,9 +1,11 @@
 package com.jpaexample.jpapratice.ch08;
 
+import com.jpaexample.jpapratice.configuration.DataJpaTestConfig;
 import com.jpaexample.jpapratice.domain.ch05.entity.User;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
 import javax.persistence.EntityManager;
@@ -12,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @ActiveProfiles("test")
+@Import(DataJpaTestConfig.class)
 public class ProxyTest {
 
     @Autowired

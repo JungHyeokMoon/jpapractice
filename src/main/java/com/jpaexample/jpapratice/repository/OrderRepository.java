@@ -2,6 +2,10 @@ package com.jpaexample.jpapratice.repository;
 
 import com.jpaexample.jpapratice.domain.ch05.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
-public interface OrderRepository extends JpaRepository<Order,Long> {
+@Repository
+public interface OrderRepository extends JpaRepository<Order,Long>, OrderRepositoryCustom {
+
 }

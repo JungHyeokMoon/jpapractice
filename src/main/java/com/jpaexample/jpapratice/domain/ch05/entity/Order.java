@@ -2,6 +2,9 @@ package com.jpaexample.jpapratice.domain.ch05.entity;
 
 import com.jpaexample.jpapratice.domain.ch05.enums.OrderStatus;
 import com.jpaexample.jpapratice.domain.ch06.Delivery;
+import com.jpaexample.jpapratice.domain.ch06.DeliveryStatus;
+import com.jpaexample.jpapratice.exception.BusinessException;
+import com.jpaexample.jpapratice.exception.ErrorCode;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -45,6 +48,10 @@ public class Order extends BaseEntity {
         user.getOrders().add(this);
     }
 
+    public void setStatus(OrderStatus orderStatus){
+        this.orderStatus = orderStatus;
+    }
+
     public void addOrderItem(OrderItem orderItem) {
         this.orderItems.add(orderItem);
         orderItem.setOrder(this);
@@ -53,5 +60,31 @@ public class Order extends BaseEntity {
     public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
         delivery.setOrder(this);
+    }
+
+    public static Order createOrder(User user, Delivery delivery, OrderItem... orderItems){
+        Order order = Order.builder().orderStatus(OrderStatus.ORDER).build();
+        order.setUser(user);
+        order.setDelivery(delivery);
+        for(var item : orderItems)
+            order.addOrderItem(item);
+        return order;
+    }
+
+    public int getTotalPrice(){
+        int totalPrice=0;
+        for(var item : orderItems)
+            totalPrice += item.getTotalPrice();
+        return totalPrice;
+    }
+
+    public void cancel(){
+        if(delivery.getStatus()== DeliveryStatus.COMP){
+            throw new BusinessException(ErrorCode.ALREADY_COMP);
+        }
+
+        this.setStatus(OrderStatus.CANCEL);
+        for(var item : orderItems)
+            item.cancel();
     }
 }

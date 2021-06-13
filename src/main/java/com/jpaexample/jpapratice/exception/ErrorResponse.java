@@ -1,23 +1,33 @@
 package com.jpaexample.jpapratice.exception;
 
-import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ErrorResponse {
-
+    private LocalDateTime time;
+    private int status;
+    private String error;
+    private String code;
     private String message;
-    private HttpStatus httpStatus;
 
-    private ErrorResponse(final ErrorCode errorCode) {
-        this.message = errorCode.getMessage();
-        this.httpStatus = errorCode.getHttpStatus();
-    }
-
-    public static ErrorResponse of(final ErrorCode errorCode){
-        return new ErrorResponse(errorCode);
+    public static ResponseEntity<ErrorResponse> toResponseEntity(ErrorCode errorCode) {
+        return ResponseEntity
+                .status(errorCode.getHttpStatus())
+                .body(ErrorResponse.builder()
+                        .status(errorCode.getHttpStatus().value())
+                        .error(errorCode.getHttpStatus().name())
+                        .code(errorCode.name())
+                        .message(errorCode.getMessage())
+                        .build()
+                );
     }
 }

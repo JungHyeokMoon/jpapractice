@@ -1,5 +1,6 @@
 package com.jpaexample.jpapratice.domain.ch05.entity;
 
+import com.jpaexample.jpapratice.configuration.DataJpaTestConfig;
 import com.jpaexample.jpapratice.domain.ch05.enums.OrderStatus;
 import com.jpaexample.jpapratice.domain.ch09.Address;
 import com.jpaexample.jpapratice.repository.UserRepository;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -20,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @ActiveProfiles("test")
 @EnableJpaAuditing
+@Import(DataJpaTestConfig.class)
 class UserTest {
 
     @Autowired

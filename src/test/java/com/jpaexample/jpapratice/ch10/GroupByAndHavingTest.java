@@ -1,5 +1,6 @@
 package com.jpaexample.jpapratice.ch10;
 
+import com.jpaexample.jpapratice.configuration.DataJpaTestConfig;
 import com.jpaexample.jpapratice.domain.ch05.entity.Order;
 import com.jpaexample.jpapratice.domain.ch05.entity.User;
 import com.jpaexample.jpapratice.domain.ch05.enums.OrderStatus;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
 import javax.persistence.EntityManager;
@@ -20,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @ActiveProfiles("test")
+@Import(DataJpaTestConfig.class)
 public class GroupByAndHavingTest {
 
     @Autowired
